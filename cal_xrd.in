@@ -1,0 +1,18 @@
+dimension 3
+boundary p p p
+atom_style full
+
+
+
+#region bulk block 0 30 0 30 0 30
+#create_atoms 1 random 1000 123 bulk #@@bulk
+read_data data_in
+fix 1 all nve
+thermo 1
+dump 1 all atom 100 dump.crack
+
+compute 2 all xrd 1.541838 C 2Theta 10 100
+fix 999 all ave/histo/weight 1 1 1 10 100 250 c_2[1] c_2[2] mode vector file test.xrd
+
+run 1
+write_data data_out
