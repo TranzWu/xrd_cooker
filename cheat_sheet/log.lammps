@@ -1,0 +1,83 @@
+LAMMPS (30 Jul 2021)
+dimension 3
+boundary p p p
+atom_style full
+lattice    fcc 0.15
+Lattice spacing in x,y,z = 2.9876032 2.9876032 2.9876032
+region box block 0 10 0 10 0 10 units box
+create_box 1 box
+Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (10.000000 10.000000 10.000000)
+  1 by 2 by 2 MPI processor grid
+
+mass 1 1.0
+
+region bulk block 0 30 0 30 0 30
+create_atoms 1 region box units lattice#@@bulk
+Created 172 atoms
+  using lattice units in orthogonal box = (0.0000000 0.0000000 0.0000000) to (10.000000 10.000000 10.000000)
+  create_atoms CPU = 0.001 seconds
+
+fix 1 all nve
+thermo 1
+dump 1 all atom 100 dump.crack
+
+compute 2 all xrd 1.541838 C 2Theta 10 100
+fix 999 all ave/histo/weight 1 1 1 10 100 250 c_2[1] c_2[2] mode vector file test.xrd
+
+run 1
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+
+- compute_xrd command: doi:10.1088/0965-0393/21/5/055020
+
+@Article{Coleman13,
+ author = {S. P. Coleman, D. E. Spearot, L. Capolungo},
+ title = {Virtual diffraction analysis of Ni [010] symmetric tilt grain boundaries},
+ journal = {Modelling and Simulation in Materials Science and Engineering},
+ year =    2013,
+ volume =  21,
+ pages =   {055020}
+}
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+WARNING: No pairwise cutoff or binsize set. Atom sorting therefore disabled. (src/atom.cpp:2165)
+WARNING: Communication cutoff is 0.0. No ghost atoms will be generated. Atoms may get lost. (src/comm_brick.cpp:210)
+Per MPI rank memory allocation (min/avg/max) = 6.474 | 6.475 | 6.475 Mbytes
+Step Temp E_pair E_mol TotEng Press 
+       0            0            0            0            0            0 
+       1            0            0            0            0            0 
+Loop time of 0.0039585 on 4 procs for 1 steps with 172 atoms
+
+Performance: 109132.247 tau/day, 252.621 timesteps/s
+96.6% CPU use with 4 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Bond    | 0          | 2.5e-07    | 1e-06      |   0.0 |  0.01
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 2e-06      | 3.25e-06   | 4e-06      |   0.0 |  0.08
+Output  | 1.7e-05    | 8.575e-05  | 0.000118   |   0.0 |  2.17
+Modify  | 0.003831   | 0.0038637  | 0.003935   |   0.1 | 97.61
+Other   |            | 5.5e-06    |            |       |  0.14
+
+Nlocal:        43.0000 ave          56 max          32 min
+Histogram: 1 0 0 0 2 0 0 0 0 1
+Nghost:        22.0000 ave          36 max           8 min
+Histogram: 1 0 0 0 0 2 0 0 0 1
+Neighs:         0.00000 ave           0 max           0 min
+Histogram: 4 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 0
+Ave neighs/atom = 0.0000000
+Ave special neighs/atom = 0.0000000
+Neighbor list builds = 0
+Dangerous builds = 0
+write_data data_out
+System init for write_data ...
+WARNING: Communication cutoff is 0.0. No ghost atoms will be generated. Atoms may get lost. (src/comm_brick.cpp:210)
+Total wall time: 0:00:00

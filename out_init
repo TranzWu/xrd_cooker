@@ -1,9 +1,9 @@
 LAMMPS (30 Jul 2021)
 Created orthogonal box = (0.0000000 0.0000000 0.0000000) to (30.000000 30.000000 30.000000)
   1 by 2 by 2 MPI processor grid
-Created 100 atoms
+Created 10 atoms
   using lattice units in orthogonal box = (0.0000000 0.0000000 0.0000000) to (30.000000 30.000000 30.000000)
-  create_atoms CPU = 0.001 seconds
+  create_atoms CPU = 0.000 seconds
 
 CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
 
@@ -19,14 +19,14 @@ Setting up Verlet run ...
   Time step     : 0.005
 WARNING: No pairwise cutoff or binsize set. Atom sorting therefore disabled. (src/atom.cpp:2165)
 WARNING: Communication cutoff is 0.0. No ghost atoms will be generated. Atoms may get lost. (src/comm_brick.cpp:210)
-Per MPI rank memory allocation (min/avg/max) = 12.57 | 12.57 | 12.57 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 6.380 | 9.727 | 12.57 Mbytes
 Step Temp E_pair E_mol TotEng Press 
        0            0            0            0            0            0 
        1            0            0            0            0            0 
-Loop time of 0.075214 on 4 procs for 1 steps with 100 atoms
+Loop time of 0.018387 on 4 procs for 1 steps with 10 atoms
 
-Performance: 5743.612 tau/day, 13.295 timesteps/s
-98.0% CPU use with 4 MPI tasks x no OpenMP threads
+Performance: 23494.860 tau/day, 54.386 timesteps/s
+96.9% CPU use with 4 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -34,13 +34,13 @@ Section |  min time  |  avg time  |  max time  |%varavg| %total
 Pair    | 0          | 0          | 0          |   0.0 |  0.00
 Bond    | 0          | 0          | 0          |   0.0 |  0.00
 Neigh   | 0          | 0          | 0          |   0.0 |  0.00
-Comm    | 0          | 1e-06      | 2e-06      |   0.0 |  0.00
-Output  | 1.8e-05    | 0.000149   | 0.000212   |   0.0 |  0.20
-Modify  | 0.074989   | 0.075054   | 0.075192   |   0.0 | 99.79
-Other   |            | 9.5e-06    |            |       |  0.01
+Comm    | 1e-06      | 1e-06      | 1e-06      |   0.0 |  0.01
+Output  | 2.1e-05    | 0.0001375  | 0.000193   |   0.0 |  0.75
+Modify  | 0.01818    | 0.018237   | 0.018361   |   0.1 | 99.19
+Other   |            | 1.125e-05  |            |       |  0.06
 
-Nlocal:        25.0000 ave          32 max          19 min
-Histogram: 1 0 0 1 0 1 0 0 0 1
+Nlocal:        2.50000 ave           5 max           0 min
+Histogram: 1 0 1 0 0 0 0 0 1 1
 Nghost:         0.00000 ave           0 max           0 min
 Histogram: 4 0 0 0 0 0 0 0 0 0
 Neighs:         0.00000 ave           0 max           0 min

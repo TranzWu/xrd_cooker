@@ -1,23 +1,29 @@
-def black_box_function(x, y, z):
-    """Function with unknown internals we wish to maximize.
-
-    This is just serving as an example, for all intents and
-    purposes think of the internals of this function, i.e.: the process
-    which generates its output values, as unknown.
-    """
-    return -x ** 2 - (y - 1) ** 2 + z
-
 from bayes_opt import BayesianOptimization
+from bayes_opt import UtilityFunction
 
-# Bounded region of parameter space
-pbounds = {'x': (2, 4), 'y': (-3, 3), 'z':(1,2)}
+# Let's start by definying our function, bounds, and instanciating an optimization object.
+def black_box_function(x, y):
+    return -x ** 2 - (y - 1) ** 2 + 1
 
 optimizer = BayesianOptimization(
-    f=black_box_function,
-    pbounds=pbounds,
+    f=None,
+    pbounds={'x': (-2, 2), 'y': (-3, 3)},
+    verbose=2,
     random_state=1,
 )
 
-# Will probe only the two points specified above
-optimizer.maximize(init_points=2, n_iter=1)
-print(optimizer.res[-1]['params'])
+
+
+
+utility = UtilityFunction(kind="ucb", kappa=2.5, xi=0.0)
+
+
+for _ in range(5):
+    next_point = optimizer.suggest(utility)
+    target = black_box_function(**next_point)
+    optimizer.register(params=next_point, target=target)
+    
+    print(target, next_point)
+print(optimizer.max)
+
+next_point = optimizer.suggest(utility)
