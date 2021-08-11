@@ -62,11 +62,11 @@ class Analyzer():
 			loss += (self.recepie[i] - self.intensity[i])**2
 		return -loss
 
-	def plot(self, out):
+	def plot(self, out, recepie=False):
 		plt.clf()
 		plt.plot(self.angle, self.intensity, label='lammps')
-
-		plt.plot(self.angle, self.recepie, label='recepie')
+		if recepie:
+			plt.plot(self.angle, self.recepie, label='recepie')
 		plt.legend()
 		plt.savefig(out)
 
